@@ -197,7 +197,7 @@ namespace Kalkulator
                     {
                         if (Double.TryParse(obliczenia.Text.Substring(i, j - i), out doDodania))
                         {
-                            listNumbers.Add(doDodania/*Convert.ToDouble(obliczenia.Text.Substring(i+1, j - i))*/);
+                            listNumbers.Add(doDodania);
                             listSigns.Add(obliczenia.Text.Substring(j, 1));
                             i = j + 1;
                             j++;
@@ -205,7 +205,7 @@ namespace Kalkulator
                     }
                 }
                 MakeCalculations(sender, e);
-                if (!hasFail)
+                if (!hasFail && obliczenia.Text.Length>0)
                 {
                     obliczenia.Text += listNumbers[0].ToString();
                     History.Items.Add(obliczenia.Text);

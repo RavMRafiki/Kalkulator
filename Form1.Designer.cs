@@ -50,7 +50,7 @@ namespace Kalkulator
             this.del = new System.Windows.Forms.Button();
             this.sum = new System.Windows.Forms.Button();
             this.obliczenia = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.History = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // number1
@@ -307,20 +307,19 @@ namespace Kalkulator
             this.obliczenia.Name = "obliczenia";
             this.obliczenia.Size = new System.Drawing.Size(557, 45);
             this.obliczenia.TabIndex = 19;
-            this.obliczenia.Text = "";
             this.obliczenia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // listBox1
+            // History
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.listBox1.Enabled = false;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(16, 38);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.listBox1.Size = new System.Drawing.Size(557, 84);
-            this.listBox1.TabIndex = 20;
+            this.History.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.History.FormattingEnabled = false;
+            this.History.HorizontalScrollbar = true;
+            this.History.ItemHeight = 16;
+            this.History.Location = new System.Drawing.Point(16, 38);
+            this.History.Name = "History";
+            this.History.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.History.Size = new System.Drawing.Size(557, 84);
+            this.History.TabIndex = 20;
             // 
             // Form1
             // 
@@ -328,7 +327,7 @@ namespace Kalkulator
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(590, 682);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.History);
             this.Controls.Add(this.obliczenia);
             this.Controls.Add(this.sum);
             this.Controls.Add(this.del);
@@ -380,7 +379,7 @@ namespace Kalkulator
         private System.Windows.Forms.Button del;
         private System.Windows.Forms.Button sum;
         private System.Windows.Forms.TextBox obliczenia;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox History;
     }
 }
 

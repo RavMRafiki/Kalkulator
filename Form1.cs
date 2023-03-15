@@ -17,6 +17,8 @@ namespace Kalkulator
         private static readonly string separator = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
         private List<double> listNumbers = new List<double>();
         private List<string> listSigns = new List<string>();
+        private static readonly char[] signsFirst = new char[] { '+', '-' };
+        private static readonly char[] signsSecond = new char[] { '*', '/' };
         public Form1()
         {
             InitializeComponent();
@@ -157,24 +159,104 @@ namespace Kalkulator
 
         private void Calculate(object sender, EventArgs e)
         {
-            AddSign(sender, e);
-            int i = 0;
-            double doDodania = 0;
-
-            for (int j = 0; j < obliczenia.Text.Length; j++)
+            if (!ContainsEquationSign())
             {
-                if (IsSign(obliczenia.Text[j]))
+                AddSign(sender, e);
+                int i = 0;
+                double doDodania = 0;
+
+                for (int j = 0; j < obliczenia.Text.Length; j++)
                 {
-                    if (Double.TryParse(obliczenia.Text.Substring(i, j - i), out doDodania))
+                    if (IsSign(obliczenia.Text[j]))
                     {
-                        listNumbers.Add(doDodania/*Convert.ToDouble(obliczenia.Text.Substring(i+1, j - i))*/);
-                        listSigns.Add(obliczenia.Text.Substring(j, 1));
-                        i = j+1;
-                        j++;
+                        if (Double.TryParse(obliczenia.Text.Substring(i, j - i), out doDodania))
+                        {
+                            listNumbers.Add(doDodania/*Convert.ToDouble(obliczenia.Text.Substring(i+1, j - i))*/);
+                            listSigns.Add(obliczenia.Text.Substring(j, 1));
+                            i = j + 1;
+                            j++;
+                        }
+                    }
+                }
+                MakeCalculations(sender, e);
+                obliczenia.Text += listNumbers[0].ToString();
+                History.Items.Add(obliczenia.Text);
+                listNumbers.Clear();
+                listSigns.Clear();
+            } 
+            else
+            {
+                obliczenia.Text = obliczenia.Text.Substring(ContainsEquationSignOn()+1);
+            }
+            
+        }
+        private bool ContainsEquationSign()
+        {
+            if (obliczenia.Text.Length >= 0)
+            {
+                for (int i = obliczenia.Text.Length - 1; i >= 0; i--)
+                {
+                    if (obliczenia.Text[i] == '=')
+                    {
+                        return true;
                     }
                 }
             }
-            obliczenia.Text = listSigns.Count().ToString()+ listNumbers.Count().ToString();
+            return false;
         }
+        private int ContainsEquationSignOn()
+        {
+            if (obliczenia.Text.Length >= 0)
+            {
+                for (int i = obliczenia.Text.Length - 1; i >= 0; i--)
+                {
+                    if (obliczenia.Text[i] == '=')
+                    {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+        private void MakeCalculations(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listSigns.Count - 1; i++)
+            {
+                if (listSigns[i] == "*")
+                {
+                    listSigns.RemoveAt(i);
+                    listNumbers[i] = listNumbers[i] * listNumbers[i + 1];
+                    listNumbers.RemoveAt(i + 1);
+                    i--;
+                }
+                else if (listSigns[i] == "/")
+                {
+                    listSigns.RemoveAt(i);
+                    listNumbers[i] = listNumbers[i] / listNumbers[i + 1];
+                    listNumbers.RemoveAt(i + 1);
+                    i--;
+
+                }
+            }
+            for (int i = 0; i < listSigns.Count - 1; i++)
+            {
+                if (listSigns[i] == "+")
+                {
+                    listSigns.RemoveAt(i);
+                    listNumbers[i] = listNumbers[i] + listNumbers[i + 1];
+                    listNumbers.RemoveAt(i + 1);
+                    i--;
+                }
+                else if (listSigns[i] == "-")
+                {
+                    listSigns.RemoveAt(i);
+                    listNumbers[i] = listNumbers[i] - listNumbers[i + 1];
+                    listNumbers.RemoveAt(i + 1);
+                    i--;
+
+                }
+            }
+        }
+
     }
 }

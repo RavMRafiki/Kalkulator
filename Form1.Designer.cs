@@ -194,6 +194,7 @@ namespace Kalkulator
             this.signComma.TabIndex = 10;
             this.signComma.Text = ",";
             this.signComma.UseVisualStyleBackColor = false;
+            this.signComma.Click += new System.EventHandler(this.AddComma);
             // 
             // signPlus
             // 
@@ -311,6 +312,7 @@ namespace Kalkulator
             // listBox1
             // 
             this.listBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listBox1.Enabled = false;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(16, 38);
@@ -318,7 +320,6 @@ namespace Kalkulator
             this.listBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.listBox1.Size = new System.Drawing.Size(557, 84);
             this.listBox1.TabIndex = 20;
-            this.listBox1.Enabled = false;
             // 
             // Form1
             // 

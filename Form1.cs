@@ -14,6 +14,7 @@ namespace Kalkulator
     public partial class Form1 : Form
     {
         private static readonly char[] znaki = new char[] {'-', '+', '*', '/', '='};
+        private static readonly string separator = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
         private List<double> listaDouble = new List<double>();
         private List<double> listaSign = new List<double>();
         public Form1()
@@ -107,8 +108,25 @@ namespace Kalkulator
 
         private void AddComma(object sender, EventArgs e)
         {
-            
-                obliczenia.Text += CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+            if (!IsCommaSinceSign(sender, e))
+                {
+                    obliczenia.Text += separator;
+                }
+        }
+        private bool IsCommaSinceSign(object sender, EventArgs e)
+        {
+            for (int i = obliczenia.Text.Length - 1; i >= 0; i--)
+            {
+                if (IsSign(obliczenia.Text[i]))
+                {
+                    return false;
+                }
+                if (obliczenia.Text[i].ToString() == separator)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Kalkulator
         private List<string> listSigns = new List<string>();
         private static readonly char[] signsFirst = new char[] { '+', '-' };
         private static readonly char[] signsSecond = new char[] { '*', '/' };
+        private static bool hasFail = false;
         public Form1()
         {
             InitializeComponent();
@@ -26,12 +27,22 @@ namespace Kalkulator
 
         private void addNumber(object sender, EventArgs e)
         {
+            if (hasFail)
+            {
+                DeleteAll(sender, e);
+                hasFail = false;
+            }
             Button btn = sender as Button;
             obliczenia.Text += btn.Text;
         }
 
         private void Delete1(object sender, EventArgs e)
         {
+            if (hasFail)
+            {
+                DeleteAll(sender, e);
+                hasFail = false;
+            }
             if (obliczenia.Text.Length > 0)
             {
                 obliczenia.Text = obliczenia.Text.Substring(0, obliczenia.Text.Length - 1);
@@ -45,7 +56,12 @@ namespace Kalkulator
 
         private void DeleteLine(object sender, EventArgs e)
         {
-            for(int i = obliczenia.Text.Length-1; i >=0 ; i--)
+            if (hasFail)
+            {
+                DeleteAll(sender,e);
+                hasFail = false;
+            }
+            for (int i = obliczenia.Text.Length-1; i >=0 ; i--)
             {
                 if (IsSign(obliczenia.Text[i]))
                 {
@@ -66,6 +82,11 @@ namespace Kalkulator
 
         private void AddSign(object sender, EventArgs e)
         {
+            if (hasFail)
+            {
+                DeleteAll(sender, e);
+                hasFail = false;
+            }
             FixDecimal(sender, e);
             Button btn = sender as Button;
             if (obliczenia.Text.Length > 0)
@@ -111,6 +132,11 @@ namespace Kalkulator
 
         private void AddComma(object sender, EventArgs e)
         {
+            if (hasFail)
+            {
+                DeleteAll(sender, e);
+                hasFail = false;
+            }
             if (!IsCommaSinceSign(sender, e))
                 {
                     obliczenia.Text += separator;
@@ -179,8 +205,11 @@ namespace Kalkulator
                     }
                 }
                 MakeCalculations(sender, e);
-                obliczenia.Text += listNumbers[0].ToString();
-                History.Items.Add(obliczenia.Text);
+                if (!hasFail)
+                {
+                    obliczenia.Text += listNumbers[0].ToString();
+                    History.Items.Add(obliczenia.Text);
+                }
                 listNumbers.Clear();
                 listSigns.Clear();
             } 
@@ -231,6 +260,12 @@ namespace Kalkulator
                 }
                 else if (listSigns[i] == "/")
                 {
+                    if (listNumbers[i + 1] == 0)
+                    {
+                        hasFail = true;
+                        obliczenia.Text += "Error";
+                        return;
+                    }
                     listSigns.RemoveAt(i);
                     listNumbers[i] = listNumbers[i] / listNumbers[i + 1];
                     listNumbers.RemoveAt(i + 1);

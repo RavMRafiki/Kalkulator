@@ -38,3 +38,13 @@ C:\Users\rafal\source\repos\Kalkulator2\Kalkulator\obj\Debug\Kalkulator.csproj.G
 C:\Users\rafal\source\repos\Kalkulator2\Kalkulator\obj\Debug\Kalkulator.csproj.CoreCompileInputs.cache
 C:\Users\rafal\source\repos\Kalkulator2\Kalkulator\obj\Debug\Kalkulator.exe
 C:\Users\rafal\source\repos\Kalkulator2\Kalkulator\obj\Debug\Kalkulator.pdb
+E:\Programowanie\GitHubLearning\JS\Kalkulator\bin\Debug\Kalkulator.exe.config
+E:\Programowanie\GitHubLearning\JS\Kalkulator\bin\Debug\Kalkulator.exe
+E:\Programowanie\GitHubLearning\JS\Kalkulator\bin\Debug\Kalkulator.pdb
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.csproj.AssemblyReference.cache
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.Form1.resources
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.Properties.Resources.resources
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.csproj.GenerateResource.cache
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.csproj.CoreCompileInputs.cache
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.exe
+E:\Programowanie\GitHubLearning\JS\Kalkulator\obj\Debug\Kalkulator.pdb

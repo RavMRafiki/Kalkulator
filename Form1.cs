@@ -15,8 +15,8 @@ namespace Kalkulator
     {
         private static readonly char[] znaki = new char[] {'-', '+', '*', '/', '='};
         private static readonly string separator = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
-        private List<double> listaDouble = new List<double>();
-        private List<double> listaSign = new List<double>();
+        private List<double> listNumbers = new List<double>();
+        private List<string> listSigns = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -64,6 +64,7 @@ namespace Kalkulator
 
         private void AddSign(object sender, EventArgs e)
         {
+            FixDecimal(sender, e);
             Button btn = sender as Button;
             if (obliczenia.Text.Length > 0)
             {
@@ -127,6 +128,53 @@ namespace Kalkulator
                 }
             }
             return false;
+        }
+        private void FixDecimal(object sender, EventArgs e )
+        {
+            if (obliczenia.Text.Length > 0)
+            {
+                if (IsCommaSinceSign(sender, e))
+                {
+                    for (int i = obliczenia.Text.Length - 1; i > 0; i--)
+                    {
+                        if(obliczenia.Text[i].ToString() == separator && IsSign(obliczenia.Text[i - 1]))
+                            {
+                            obliczenia.Text = obliczenia.Text.Substring(0, i) + "0" + obliczenia.Text.Substring(i, obliczenia.Text.Length - i);
+                        }
+
+                    }
+                    if(obliczenia.Text[0].ToString() == separator)
+                    {
+                        obliczenia.Text = "0" + obliczenia.Text;
+                    }
+                }
+                if (obliczenia.Text[obliczenia.Text.Length-1].ToString() == separator)
+                {
+                    Delete1(sender, e);
+                }
+            }
+        }
+
+        private void Calculate(object sender, EventArgs e)
+        {
+            AddSign(sender, e);
+            int i = 0;
+            double doDodania = 0;
+
+            for (int j = 0; j < obliczenia.Text.Length; j++)
+            {
+                if (IsSign(obliczenia.Text[j]))
+                {
+                    if (Double.TryParse(obliczenia.Text.Substring(i, j - i), out doDodania))
+                    {
+                        listNumbers.Add(doDodania/*Convert.ToDouble(obliczenia.Text.Substring(i+1, j - i))*/);
+                        listSigns.Add(obliczenia.Text.Substring(j, 1));
+                        i = j+1;
+                        j++;
+                    }
+                }
+            }
+            obliczenia.Text = listSigns.Count().ToString()+ listNumbers.Count().ToString();
         }
     }
 }

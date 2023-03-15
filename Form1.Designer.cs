@@ -298,6 +298,7 @@ namespace Kalkulator
             this.sum.TabIndex = 18;
             this.sum.Text = "=";
             this.sum.UseVisualStyleBackColor = false;
+            this.sum.Click += new System.EventHandler(this.Calculate);
             // 
             // obliczenia
             // 
@@ -306,7 +307,7 @@ namespace Kalkulator
             this.obliczenia.Name = "obliczenia";
             this.obliczenia.Size = new System.Drawing.Size(557, 45);
             this.obliczenia.TabIndex = 19;
-            this.obliczenia.Text = "Wynik";
+            this.obliczenia.Text = "";
             this.obliczenia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // listBox1

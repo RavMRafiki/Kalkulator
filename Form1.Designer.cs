@@ -311,7 +311,7 @@ namespace Kalkulator
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(218)))), ((int)(((byte)(217)))));
-            this.ClientSize = new System.Drawing.Size(442, 554);
+            this.ClientSize = new System.Drawing.Size(442, 532);
             this.Controls.Add(this.History);
             this.Controls.Add(this.obliczenia);
             this.Controls.Add(this.sum);

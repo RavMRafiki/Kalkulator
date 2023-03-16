@@ -82,10 +82,6 @@ namespace Kalkulator
 
         private void AddSign(object sender, EventArgs e)
         {
-            if (obliczenia.Text.Length>0 && obliczenia.Text[0] == '-')
-            {
-                FixMinusZero();
-            }
             if (hasFail)
             {
                 DeleteAll(sender, e);
@@ -95,7 +91,7 @@ namespace Kalkulator
             Button btn = sender as Button;
             if (obliczenia.Text.Length > 0)
             {
-                if (btn.Text == "-" && obliczenia.Text[obliczenia.Text.Length - 1] != null && obliczenia.Text[obliczenia.Text.Length - 1] == '-')
+                if (btn.Text == "-" && obliczenia.Text[obliczenia.Text.Length - 1] == '-')
                 {
                     if (obliczenia.Text.Length > 1 && !IsSign(obliczenia.Text[obliczenia.Text.Length - 2]))
                     {
@@ -107,7 +103,7 @@ namespace Kalkulator
                         Delete1(sender, e);
                     }
                 }
-                else if (btn.Text == "-" && obliczenia.Text[obliczenia.Text.Length - 1] != null && IsSign(obliczenia.Text[obliczenia.Text.Length - 1]))
+                else if (btn.Text == "-" && IsSign(obliczenia.Text[obliczenia.Text.Length - 1]))
                 {
                     obliczenia.Text += btn.Text;
                 }

@@ -82,6 +82,10 @@ namespace Kalkulator
 
         private void AddSign(object sender, EventArgs e)
         {
+            if (obliczenia.Text.Length>0 && obliczenia.Text[0] == '-')
+            {
+                FixMinusZero();
+            }
             if (hasFail)
             {
                 DeleteAll(sender, e);
@@ -127,6 +131,10 @@ namespace Kalkulator
             if (obliczenia.Text.Length > 0 && IsSign(obliczenia.Text[0]) && obliczenia.Text[0] != '-')
             {
                 obliczenia.Text = "";
+            }
+            if (obliczenia.Text.Length > 0 && obliczenia.Text[0] == '-')
+            {
+                FixMinusZero();
             }
         }
 
@@ -289,6 +297,34 @@ namespace Kalkulator
                     listNumbers.RemoveAt(i + 1);
                     i--;
 
+                }
+            }
+        }
+        private void FixMinusZero()
+        {
+            double zero = 1;
+            for (int j = 1; j < obliczenia.Text.Length; j++)
+            {
+                if (IsSign(obliczenia.Text[j]))
+                {
+                    if (Double.TryParse(obliczenia.Text.Substring(0, j), out zero))
+                    {
+                        if (zero == 0)
+                        {
+                            obliczenia.Text = obliczenia.Text.Substring(1, obliczenia.Text.Length - 1);
+                        }
+                    }
+                    
+                }
+                if (j == obliczenia.Text.Length - 1)
+                {
+                    if (Double.TryParse(obliczenia.Text.Substring(0, j), out zero))
+                    {
+                        if (zero == 0)
+                        {
+                            obliczenia.Text = obliczenia.Text.Substring(1, obliczenia.Text.Length - 1);
+                        }
+                    }
                 }
             }
         }
